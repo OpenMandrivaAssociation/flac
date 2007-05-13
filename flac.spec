@@ -1,6 +1,6 @@
 %define name  flac
 %define version 1.1.4
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major  8
 %define libname %mklibname %{name} %{major}
@@ -52,6 +52,7 @@ Requires: %{libname} = %{version}-%release
 Requires: libogg-devel
 Provides:  libflac-devel = %version-%release
 Provides:  liboggflac-devel = %version-%release
+Conflicts: %mklibname -d flac 7
 
 %description -n%libname-devel
 FLAC is an Open Source lossless audio codec developed by Josh Coalson.
