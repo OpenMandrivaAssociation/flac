@@ -1,11 +1,13 @@
 %define name  flac
-%define version 1.1.4
-%define release %mkrel 2
+%define version 1.2.0
+%define release %mkrel 1
 
 %define major  8
 %define libname %mklibname %{name} %{major}
+%define libnamedev %mklibname -d %{name}
 %define majorpp 6
 %define libnamepp %mklibname %{name}++ %{majorpp}
+%define libnameppdev %mklibname -d %{name}++
 
 Name: %name 
 Summary: An encoder/decoder for the Free Lossless Audio Codec
@@ -45,7 +47,7 @@ FLAC is an Open Source lossless audio codec developed by Josh Coalson.
 
 This package contains the C libraries.
 
-%package -n %libname-devel
+%package -n %libnamedev
 Summary: Libraries and headers needed for building apps using FLAC
 Group: Development/C
 Requires: %{libname} = %{version}-%release
@@ -53,8 +55,9 @@ Requires: libogg-devel
 Provides:  libflac-devel = %version-%release
 Provides:  liboggflac-devel = %version-%release
 Conflicts: %mklibname -d flac 7
+Obsoletes: %mklibname -d flac 8
 
-%description -n%libname-devel
+%description -n %libnamedev
 FLAC is an Open Source lossless audio codec developed by Josh Coalson.
 
 This package contains the libraries and header files necessary to develop
@@ -69,15 +72,16 @@ FLAC is an Open Source lossless audio codec developed by Josh Coalson.
 
 This package contains the libraries for C++ applications.
 
-%package -n %libnamepp-devel
+%package -n %libnameppdev
 Summary: Libraries and headers needed for building apps using FLAC++
 Group: Development/C++
 Requires: %{libnamepp} = %{version}-%release
-Requires: %libname-devel = %version-%release
+Requires: %libnamedev = %version-%release
 Provides:  libflac++-devel = %version-%release
 Provides:  liboggflac++-devel = %version-%release
+Obsoletes: %mklibname -d flac++ 6
 
-%description -n %libnamepp-devel
+%description -n %libnameppdev
 FLAC is an Open Source lossless audio codec developed by Josh Coalson.
 
 This package contains the libraries and header files necessary to develop
@@ -122,7 +126,7 @@ rm -rf %{buildroot}
 %defattr(-, root, root)
 %_libdir/libFLAC++.so.%{majorpp}*
 
-%files -n %libname-devel 
+%files -n %libnamedev
 %defattr(-, root, root)
 %{_includedir}/FLAC
 %{_libdir}/libFLAC.a
@@ -131,7 +135,7 @@ rm -rf %{buildroot}
 %_datadir/aclocal/libFLAC.m4
 %_libdir/pkgconfig/flac.pc
 
-%files -n %libnamepp-devel 
+%files -n %libnameppdev
 %defattr(-, root, root)
 %{_includedir}/FLAC++
 %{_libdir}/libFLAC++.a
