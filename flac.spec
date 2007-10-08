@@ -1,5 +1,5 @@
 %define name  flac
-%define version 1.2.0
+%define version 1.2.1
 %define release %mkrel 1
 
 %define major  8
@@ -16,7 +16,7 @@ Release:  %release
 License: GPL
 Group:  Sound
 URL: http://flac.sourceforge.net/
-Source: http://prdownloads.sourceforge.net/flac/flac-%{version}.tar.bz2
+Source: http://prdownloads.sourceforge.net/flac/flac-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
 BuildRequires: libogg-devel
 BuildRequires: nasm
