@@ -1,7 +1,3 @@
-%define name  flac
-%define version 1.2.1
-%define release %mkrel 1
-
 %define major  8
 %define libname %mklibname %{name} %{major}
 %define libnamedev %mklibname -d %{name}
@@ -9,21 +5,28 @@
 %define libnamepp %mklibname %{name}++ %{majorpp}
 %define libnameppdev %mklibname -d %{name}++
 
-Name: %name 
 Summary: An encoder/decoder for the Free Lossless Audio Codec
-Version:  %version
-Release:  %release
-License: GPL
-Group:  Sound
+Name: flac
+Version: 1.2.1
+Release: %mkrel 2
+License: BSD and GPLv2+
+Group: Sound
 URL: http://flac.sourceforge.net/
 Source: http://prdownloads.sourceforge.net/flac/flac-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-root
+Patch1: flac-1.2.1-asm.patch
+Patch2: flac-1.2.1-gcc43.patch
+Patch3: flac-1.2.1-hidesyms.patch
+Patch4: flac-1.2.1-tests.patch
+Patch5: flac-1.2.1-cflags.patch
+Patch6: flac-1.2.1-bitreader.patch
 BuildRequires: libogg-devel
 BuildRequires: nasm
 BuildRequires: libid3lib-devel
 BuildRequires: gtk-devel
 BuildRequires: gettext-devel
 BuildRequires: automake1.8
+BuildRequires: libtool
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 FLAC is an Open Source lossless audio codec developed by Josh Coalson.
@@ -88,28 +91,49 @@ This package contains the libraries and header files necessary to develop
 applications using FLAC written in C++.
 
 %prep
+
 %setup -q -n %name-%version
+%patch1 -p1 -b .asm
+%patch2 -p1 -b .gcc43
+%patch3 -p1 -b .hidesyms
+# reduce number of tests
+%patch4 -p1 -b .tests
+%patch5 -p1 -b .cflags
+%patch6 -p0 -b .bitreader
 
 %build
+./autogen.sh -V
+
 rm -rf html
 
 cp -r doc/html .
-%configure2_5x --disable-xmms-plugin
+%configure2_5x \
+    --disable-xmms-plugin \
+    --disable-thorough-tests
+
 %make
+
+%check
+make -C test check &> /dev/null
 
 %install
 rm -rf %{buildroot} installed-docs
+
 %makeinstall_std
+
 mv %buildroot%_datadir/doc/flac-%{version} installed-docs
 rm -fr %buildroot%_libdir/xmms
 
+%post -n %libname -p /sbin/ldconfig
+
+%postun -n %libname -p /sbin/ldconfig
+
+%post -n %libnamepp -p /sbin/ldconfig
+
+%postun -n %libnamepp -p /sbin/ldconfig
+
 %clean
 rm -rf %{buildroot}
-
-%post -n %libname -p /sbin/ldconfig
-%postun -n %libname -p /sbin/ldconfig
-%post -n %libnamepp -p /sbin/ldconfig
-%postun -n %libnamepp -p /sbin/ldconfig
 
 %files
 %defattr(-, root, root)
@@ -143,5 +167,3 @@ rm -rf %{buildroot}
 %{_libdir}/libFLAC++.so
 %_datadir/aclocal/libFLAC++.m4
 %_libdir/pkgconfig/flac++.pc
-
-
