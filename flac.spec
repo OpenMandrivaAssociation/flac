@@ -124,13 +124,21 @@ rm -rf %{buildroot} installed-docs
 mv %buildroot%_datadir/doc/flac-%{version} installed-docs
 rm -fr %buildroot%_libdir/xmms
 
+%if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %libname -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %post -n %libnamepp -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %libnamepp -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf %{buildroot}
