@@ -19,6 +19,7 @@ Patch3: flac-1.2.1-hidesyms.patch
 Patch4: flac-1.2.1-tests.patch
 Patch5: flac-1.2.1-cflags.patch
 Patch6: flac-1.2.1-bitreader.patch
+Patch7: flac-1.2.1-fix-str-fmt.patch
 BuildRequires: libogg-devel
 BuildRequires: nasm
 BuildRequires: libid3lib-devel
@@ -100,6 +101,7 @@ applications using FLAC written in C++.
 %patch4 -p1 -b .tests
 %patch5 -p1 -b .cflags
 %patch6 -p0 -b .bitreader
+%patch7 -p0
 
 %build
 ./autogen.sh -V
