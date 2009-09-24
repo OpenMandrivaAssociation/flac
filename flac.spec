@@ -21,7 +21,9 @@ Patch5: flac-1.2.1-cflags.patch
 Patch6: flac-1.2.1-bitreader.patch
 Patch7: flac-1.2.1-fix-str-fmt.patch
 BuildRequires: libogg-devel
+%ifarch %{ix86}
 BuildRequires: nasm
+%endif
 BuildRequires: libid3lib-devel
 BuildRequires: gettext-devel
 BuildRequires: automake1.8
