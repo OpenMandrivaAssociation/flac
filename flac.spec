@@ -23,7 +23,6 @@ Patch7: flac-1.2.1-fix-str-fmt.patch
 BuildRequires: libogg-devel
 BuildRequires: nasm
 BuildRequires: libid3lib-devel
-BuildRequires: gtk-devel
 BuildRequires: gettext-devel
 BuildRequires: automake1.8
 BuildRequires: libtool
