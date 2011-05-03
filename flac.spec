@@ -8,7 +8,7 @@
 Summary: An encoder/decoder for the Free Lossless Audio Codec
 Name: flac
 Version: 1.2.1
-Release: %mkrel 8
+Release: %mkrel 9
 License: BSD and GPLv2+
 Group: Sound
 URL: http://flac.sourceforge.net/
