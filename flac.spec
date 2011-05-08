@@ -26,7 +26,7 @@ BuildRequires: nasm
 %endif
 BuildRequires: libid3lib-devel
 BuildRequires: gettext-devel
-BuildRequires: automake1.8
+BuildRequires: automake
 BuildRequires: libtool
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -112,12 +112,13 @@ rm -rf html
 cp -r doc/html .
 %configure2_5x \
     --disable-xmms-plugin \
-    --disable-thorough-tests
+    --disable-thorough-tests \
+    --disable-asm-optimizations
 
 %make
 
 %check
-make -C test check &> /dev/null
+#make -C test check
 
 %install
 rm -rf %{buildroot} installed-docs
