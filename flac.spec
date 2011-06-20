@@ -8,7 +8,7 @@
 Summary: An encoder/decoder for the Free Lossless Audio Codec
 Name: flac
 Version: 1.2.1
-Release: %mkrel 9
+Release: %mkrel 10
 License: BSD and GPLv2+
 Group: Sound
 URL: http://flac.sourceforge.net/
@@ -127,6 +127,10 @@ rm -rf %{buildroot} installed-docs
 
 mv %buildroot%_datadir/doc/flac-%{version} installed-docs
 rm -fr %buildroot%_libdir/xmms
+
+%if "%{_lib}" == "lib64"
+perl -pi -e "s|-L/usr/lib\b|-L%{_libdir}|g" %{buildroot}%{_libdir}/*.la
+%endif
 
 %if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
