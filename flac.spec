@@ -169,8 +169,7 @@ rm -rf %{buildroot}
 %files -n %libnamedev
 %defattr(-, root, root)
 %{_includedir}/FLAC
-%{_libdir}/libFLAC.a
-%{_libdir}/libFLAC.la
+%{_libdir}/libFLAC.*a
 %{_libdir}/libFLAC.so
 %_datadir/aclocal/libFLAC.m4
 %_libdir/pkgconfig/flac.pc
@@ -178,8 +177,7 @@ rm -rf %{buildroot}
 %files -n %libnameppdev
 %defattr(-, root, root)
 %{_includedir}/FLAC++
-%{_libdir}/libFLAC++.a
-%{_libdir}/libFLAC++.la
+%{_libdir}/libFLAC++.*a
 %{_libdir}/libFLAC++.so
 %_datadir/aclocal/libFLAC++.m4
 %_libdir/pkgconfig/flac++.pc
