@@ -8,11 +8,11 @@
 Summary: An encoder/decoder for the Free Lossless Audio Codec
 Name: flac
 Version: 1.2.1
-Release: %mkrel 11
+Release: %mkrel 12
 License: BSD and GPLv2+
 Group: Sound
 URL: http://flac.sourceforge.net/
-Source: http://prdownloads.sourceforge.net/flac/flac-%{version}.tar.gz
+Source0: http://prdownloads.sourceforge.net/flac/flac-%{version}.tar.gz
 Patch1: flac-1.2.1-asm.patch
 Patch2: flac-1.2.1-gcc43.patch
 Patch3: flac-1.2.1-hidesyms.patch
@@ -28,7 +28,6 @@ BuildRequires: libid3lib-devel
 BuildRequires: gettext-devel
 BuildRequires: automake
 BuildRequires: libtool
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 FLAC is an Open Source lossless audio codec developed by Josh Coalson.
@@ -132,52 +131,28 @@ rm -fr %buildroot%_libdir/xmms
 perl -pi -e "s|-L/usr/lib\b|-L%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %endif
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%post -n %libnamepp -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %libnamepp -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-, root, root)
 %doc AUTHORS COPYING* README installed-docs/*
 %{_bindir}/flac
 %{_bindir}/metaflac
 %{_mandir}/man1/*
 
 %files -n %libname 
-%defattr(-, root, root)
 %_libdir/libFLAC.so.%{major}*
 
 %files -n %libnamepp 
-%defattr(-, root, root)
 %_libdir/libFLAC++.so.%{majorpp}*
 
 %files -n %libnamedev
-%defattr(-, root, root)
 %{_includedir}/FLAC
-%{_libdir}/libFLAC.*a
+%{_libdir}/libFLAC.a
 %{_libdir}/libFLAC.so
 %_datadir/aclocal/libFLAC.m4
 %_libdir/pkgconfig/flac.pc
 
 %files -n %libnameppdev
-%defattr(-, root, root)
 %{_includedir}/FLAC++
-%{_libdir}/libFLAC++.*a
+%{_libdir}/libFLAC++.a
 %{_libdir}/libFLAC++.so
 %_datadir/aclocal/libFLAC++.m4
 %_libdir/pkgconfig/flac++.pc
