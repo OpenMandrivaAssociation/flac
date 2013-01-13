@@ -1,0 +1,12 @@
+--- flac-1.2.1/configure.in.bero	2013-01-14 00:45:24.023414640 +0100
++++ flac-1.2.1/configure.in	2013-01-14 00:45:33.724296291 +0100
+@@ -43,8 +43,7 @@ AC_FUNC_FSEEKO
+ 
+ AC_CHECK_SIZEOF(void*,0)
+ 
+-#@@@ new name is AC_CONFIG_HEADERS
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS([config.h])
+ 
+ AC_C_BIGENDIAN
+ 

@@ -20,6 +20,7 @@ Patch4:		flac-1.2.1-tests.patch
 Patch5:		flac-1.2.1-cflags.patch
 Patch6:		flac-1.2.1-bitreader.patch
 Patch7:		flac-1.2.1-fix-str-fmt.patch
+Patch8:		flac-1.2.1-automake-1.13.patch
 BuildRequires:	pkgconfig(ogg)
 %ifarch %{ix86}
 BuildRequires:	nasm
@@ -100,6 +101,8 @@ applications using FLAC written in C++.
 %patch5 -p1 -b .cflags
 %patch6 -p0 -b .bitreader
 %patch7 -p0
+%patch8 -p1 -b .automake13~
+mv configure.in configure.ac
 
 %build
 ./autogen.sh -V
