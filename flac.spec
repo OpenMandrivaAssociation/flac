@@ -21,6 +21,7 @@ Patch5:		flac-1.2.1-cflags.patch
 Patch6:		flac-1.2.1-bitreader.patch
 Patch7:		flac-1.2.1-fix-str-fmt.patch
 Patch8:		flac-1.2.1-automake-1.13.patch
+Patch9:		ac_config_macro_XMMS.patch
 BuildRequires:	pkgconfig(ogg)
 %ifarch %{ix86}
 BuildRequires:	nasm
@@ -102,6 +103,7 @@ applications using FLAC written in C++.
 %patch6 -p0 -b .bitreader
 %patch7 -p0
 %patch8 -p1 -b .automake13~
+%patch9 -p1 -b .automake_old_macro
 mv configure.in configure.ac
 
 %build
@@ -110,6 +112,7 @@ mv configure.in configure.ac
 rm -rf html
 
 cp -r doc/html .
+autoreconf -fi
 %configure2_5x \
     --disable-xmms-plugin \
     --disable-thorough-tests \
