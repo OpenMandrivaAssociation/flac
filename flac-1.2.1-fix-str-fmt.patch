@@ -1,5 +1,5 @@
---- src/test_grabbag/cuesheet/main.c.orig	2009-03-08 01:46:55.000000000 +0100
-+++ src/test_grabbag/cuesheet/main.c	2009-03-08 01:47:57.000000000 +0100
+--- ./src/test_grabbag/cuesheet/main.c.orig	2009-03-08 01:46:55.000000000 +0100
++++ ./src/test_grabbag/cuesheet/main.c	2009-03-08 01:47:57.000000000 +0100
 @@ -115,12 +115,12 @@
  	const char *usage = "usage: test_cuesheet cuesheet_file lead_out_offset [ cdda ]\n";
  
@@ -24,8 +24,8 @@
  			return 255;
  		}
  	}
---- src/test_grabbag/picture/main.c.orig	2009-03-08 01:56:57.000000000 +0100
-+++ src/test_grabbag/picture/main.c	2009-03-08 01:57:32.000000000 +0100
+--- ./src/test_grabbag/picture/main.c.orig	2009-03-08 01:56:57.000000000 +0100
++++ ./src/test_grabbag/picture/main.c	2009-03-08 01:57:32.000000000 +0100
 @@ -211,12 +211,12 @@
  	const char *usage = "usage: test_pictures path_prefix\n";
  
@@ -41,8 +41,8 @@
  		return 255;
  	}
  
---- src/test_seeking/main.c.str	2010-12-03 07:46:52.000000000 +0000
-+++ src/test_seeking/main.c	2010-12-03 07:47:13.000000000 +0000
+--- ./src/test_seeking/main.c.str	2010-12-03 07:46:52.000000000 +0000
++++ ./src/test_seeking/main.c	2010-12-03 07:47:13.000000000 +0000
 @@ -429,7 +429,7 @@
  	static const char * const usage = "usage: test_seeking file.flac [#seeks] [#samples-in-file.flac] [file.raw]\n";
  

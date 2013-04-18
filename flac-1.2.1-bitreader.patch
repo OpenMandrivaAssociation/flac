@@ -3,8 +3,8 @@ Index: src/libFLAC/bitreader.c
 RCS file: /cvsroot/flac/flac/src/libFLAC/bitreader.c,v
 retrieving revision 1.15
 diff -u -r1.15 bitreader.c
---- src/libFLAC/bitreader.c	28 Feb 2008 05:34:26 -0000	1.15
-+++ src/libFLAC/bitreader.c	14 Mar 2008 11:07:07 -0000
+--- ./src/libFLAC/bitreader.c	28 Feb 2008 05:34:26 -0000	1.15
++++ ./src/libFLAC/bitreader.c	14 Mar 2008 11:07:07 -0000
 @@ -69,13 +69,12 @@
  #endif
  /* counts the # of zero MSBs in a word */
@@ -29,8 +29,8 @@ Index: src/libFLAC/bitreader.c
 RCS file: /cvsroot/flac/flac/src/libFLAC/bitreader.c,v
 retrieving revision 1.15
 diff -u -r1.15 bitreader.c
---- src/libFLAC/bitreader.c	28 Feb 2008 05:34:26 -0000	1.15
-+++ src/libFLAC/bitreader.c	14 Mar 2008 13:19:46 -0000
+--- ./src/libFLAC/bitreader.c	28 Feb 2008 05:34:26 -0000	1.15
++++ ./src/libFLAC/bitreader.c	14 Mar 2008 13:19:46 -0000
 @@ -149,6 +148,7 @@
  	FLAC__CPUInfo cpu_info;
  };
@@ -69,8 +69,8 @@ Index: src/libFLAC/bitreader.c
 RCS file: /cvsroot/flac/flac/src/libFLAC/bitreader.c,v
 retrieving revision 1.15
 diff -u -r1.15 bitreader.c
---- src/libFLAC/bitreader.c	28 Feb 2008 05:34:26 -0000	1.15
-+++ src/libFLAC/bitreader.c	17 Mar 2008 15:42:57 -0000
+--- ./src/libFLAC/bitreader.c	28 Feb 2008 05:34:26 -0000	1.15
++++ ./src/libFLAC/bitreader.c	17 Mar 2008 15:42:57 -0000
 @@ -803,379 +812,144 @@
  }
  
