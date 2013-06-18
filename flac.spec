@@ -8,22 +8,17 @@
 
 Summary:	An encoder/decoder for the Free Lossless Audio Codec
 Name:		flac
-Version:	1.2.1
-Release:	14
+Version:	1.3.0
+Release:	1
 License:	BSD and GPLv2+
 Group:		Sound
 Url:		http://flac.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/flac/%{name}-%{version}.tar.gz
-Patch1:		flac-1.2.1-asm.patch
-Patch2:		flac-1.2.1-gcc43.patch
-Patch3:		flac-1.2.1-hidesyms.patch
-Patch4:		flac-1.2.1-tests.patch
-Patch5:		flac-1.2.1-cflags.patch
-Patch6:		flac-1.2.1-bitreader.patch
-Patch7:		flac-1.2.1-fix-str-fmt.patch
-Patch8:		flac-1.2.1-automake-1.13.patch
-Patch9:		ac_config_macro_XMMS.patch
-
+Source0:	http://prdownloads.sourceforge.net/flac/%{name}-%{version}.tar.xz
+Patch0:		flac-1.2.1-hidesyms.patch
+# Backported from upstream
+Patch1:		flac-1.3.0-asm.patch
+Patch2:		flac-1.3.0-metaflac-strcat.patch
+Patch3:		flac-1.3.0-fflush.patch
 BuildRequires:	libtool
 %ifarch %{ix86}
 BuildRequires:	nasm
@@ -82,7 +77,6 @@ applications using FLAC written in C++.
 %prep
 %setup -q
 %apply_patches
-mv configure.in configure.ac
 
 ./autogen.sh -V
 rm -rf html
@@ -105,7 +99,7 @@ autoreconf -fi
 %makeinstall_std
 
 mv %{buildroot}%{_datadir}/doc/flac-%{version} installed-docs
-rm -fr %{buildroot}%{_libdir}/xmms
+#rm -fr %{buildroot}%{_libdir}/xmms
 
 %files
 %doc AUTHORS COPYING* README installed-docs/*
