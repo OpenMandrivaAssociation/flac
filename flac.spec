@@ -8,17 +8,12 @@
 
 Summary:	An encoder/decoder for the Free Lossless Audio Codec
 Name:		flac
-Version:	1.3.0
-Release:	7
+Version:	1.3.1
+Release:	1
 License:	BSD and GPLv2+
 Group:		Sound
 Url:		http://flac.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/flac/%{name}-%{version}.tar.xz
-Patch0:		flac-1.2.1-hidesyms.patch
-# Backported from upstream
-Patch1:		flac-1.3.0-asm.patch
-Patch2:		flac-1.3.0-metaflac-strcat.patch
-Patch3:		flac-1.3.0-fflush.patch
+Source0:	http://downloads.xiph.org/releases/flac/%{name}-%{version}.tar.xz
 BuildRequires:	libtool
 %ifarch %{ix86}
 BuildRequires:	nasm
@@ -89,6 +84,8 @@ autoreconf -fi
 	--disable-xmms-plugin \
 	--disable-thorough-tests \
 	--disable-asm-optimizations
+# *****ing retarded libtool messes with compiler flags, breaking them
+find . -name Makefile |xargs sed -i -e 's, dwarf-4, -gdwarf-4,g'
 
 %make
 
