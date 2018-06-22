@@ -9,7 +9,7 @@
 Summary:	An encoder/decoder for the Free Lossless Audio Codec
 Name:		flac
 Version:	1.3.2
-Release:	6
+Release:	7
 License:	BSD and GPLv2+
 Group:		Sound
 Url:		http://flac.sourceforge.net/
@@ -70,16 +70,14 @@ This package contains the libraries and header files necessary to develop
 applications using FLAC written in C++.
 
 %prep
-%setup -q
-%apply_patches
-
+%autosetup -p1
 ./autogen.sh -V
 rm -rf html
 cp -r doc/html .
 autoreconf -fi
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 	--disable-xmms-plugin \
 	--disable-thorough-tests \
@@ -93,10 +91,9 @@ find . -name Makefile |xargs sed -i -e 's, dwarf-4, -gdwarf-4,g'
 #make -C test check
 
 %install
-%makeinstall_std
+%make_install
 
 mv %{buildroot}%{_datadir}/doc/flac-%{version} installed-docs
-#rm -fr %{buildroot}%{_libdir}/xmms
 
 %files
 %doc AUTHORS COPYING* README installed-docs/*
@@ -121,4 +118,3 @@ mv %{buildroot}%{_datadir}/doc/flac-%{version} installed-docs
 %{_libdir}/libFLAC++.so
 %{_datadir}/aclocal/libFLAC++.m4
 %{_libdir}/pkgconfig/flac++.pc
-
