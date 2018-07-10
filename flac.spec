@@ -9,7 +9,7 @@
 Summary:	An encoder/decoder for the Free Lossless Audio Codec
 Name:		flac
 Version:	1.3.2
-Release:	7
+Release:	8
 License:	BSD and GPLv2+
 Group:		Sound
 Url:		http://flac.sourceforge.net/
