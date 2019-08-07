@@ -91,7 +91,7 @@ find . -name Makefile |xargs sed -i -e 's, dwarf-4, -gdwarf-4,g'
 %install
 %make_install
 
-mv %{buildroot}%{_datadir}/doc/flac-%{version} installed-docs
+#mv %{buildroot}%{_datadir}/doc/flac-%{version} installed-docs
 
 %files
 %doc AUTHORS COPYING* README installed-docs/*
