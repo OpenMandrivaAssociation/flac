@@ -93,6 +93,21 @@ find . -name Makefile |xargs sed -i -e 's, dwarf-4, -gdwarf-4,g'
 
 %files
 %doc AUTHORS COPYING* README
+%{_datadir}/doc/flac/FLAC.tag
+%{_datadir}/ddoc/flac/changelog.html
+%{_datadir}/ddoc/flac/developers.html
+%{_datadir}/ddoc/flac/documentation*
+%{_datadir}/ddoc/flac/faq.html
+%{_datadir}/ddoc/flac/favicon.ico
+%{_datadir}/ddoc/flac/features.html
+%{_datadir}/ddoc/flac/flac.css
+%{_datadir}/ddoc/flac/format.html
+%{_datadir}/ddoc/flac/id.html
+%{_datadir}/ddoc/flac/images/logo*
+%{_datadir}/ddoc/flac/images/logo130*
+%{_datadir}/ddoc/flac/index.html
+%{_datadir}/ddoc/flac/license.html
+%{_datadir}/ddoc/flac/ogg_mapping.html
 %{_bindir}/flac
 %{_bindir}/metaflac
 %{_mandir}/man1/*
