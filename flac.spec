@@ -5,11 +5,12 @@
 %define majorpp 6
 %define libnamepp %mklibname %{name}++ %{majorpp}
 %define devnamepp %mklibname -d %{name}++
+%global optflags %{optflags} -O3
 
 Summary:	An encoder/decoder for the Free Lossless Audio Codec
 Name:		flac
-Version:	1.3.2
-Release:	9
+Version:	1.3.3
+Release:	1
 License:	BSD and GPLv2+
 Group:		Sound
 Url:		http://flac.sourceforge.net/
@@ -85,10 +86,7 @@ autoreconf -fi
 # *****ing retarded libtool messes with compiler flags, breaking them
 find . -name Makefile |xargs sed -i -e 's, dwarf-4, -gdwarf-4,g'
 
-%make
-
-%check
-#make -C test check
+%make_build
 
 %install
 %make_install
