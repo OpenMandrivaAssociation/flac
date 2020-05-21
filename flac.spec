@@ -7,14 +7,27 @@
 %define devnamepp %mklibname -d %{name}++
 %global optflags %{optflags} -O3
 
+%define lib32name lib%{name}%{major}
+%define dev32name lib%{name}-devel
+%define lib32namepp lib%{name}++%{majorpp}
+%define dev32namepp lib%{name}++-devel
+
+# flac is used by audiofile, which is used by wine
+%ifarch %{x86_64}
+%bcond_without compat32
+%else
+%bcond_with compat32
+%endif
+
 Summary:	An encoder/decoder for the Free Lossless Audio Codec
 Name:		flac
 Version:	1.3.3
-Release:	1
+Release:	2
 License:	BSD and GPLv2+
 Group:		Sound
 Url:		http://flac.sourceforge.net/
 Source0:	http://downloads.xiph.org/releases/flac/%{name}-%{version}.tar.xz
+Patch0:		flac-1.3.3-no-Lusrlib.patch
 BuildRequires:	libtool
 %ifarch %{ix86}
 BuildRequires:	nasm
@@ -22,6 +35,10 @@ BuildRequires:	nasm
 BuildRequires:	gettext-devel
 BuildRequires:	id3lib-devel
 BuildRequires:	pkgconfig(ogg)
+BuildRequires:	doxygen
+%if %{with compat32}
+BuildRequires:	devel(libogg)
+%endif
 
 %description
 FLAC is an Open Source lossless audio codec developed by Josh Coalson.
@@ -70,6 +87,41 @@ Provides:	%{name}++-devel = %{version}-%{release}
 This package contains the libraries and header files necessary to develop
 applications using FLAC written in C++.
 
+%package -n %{lib32name}
+Summary:	Shared libraries for FLAC (32-bit)
+Group:		System/Libraries
+
+%description  -n %{lib32name}
+This package contains the C libraries.
+
+%package -n %{dev32name}
+Summary:	Libraries and headers needed for building apps using FLAC (32-bit)
+Group:		Development/C
+Requires:	%{lib32name} = %{version}-%{release}
+Requires:	%{devname} = %{version}-%{release}
+
+%description -n %{dev32name}
+This package contains the libraries and header files necessary to develop
+applications using FLAC written in C.
+
+%package -n %{lib32namepp}
+Summary:	Shared C++ libraries for FLAC (32-bit)
+Group:		System/Libraries
+
+%description  -n %{lib32namepp}
+This package contains the libraries for C++ applications.
+
+%package -n %{dev32namepp}
+Summary:	Libraries and headers needed for building apps using FLAC++ (32-bit)
+Group:		Development/C++
+Requires:	%{lib32namepp} = %{version}-%{release}
+Requires:	%{dev32name} = %{version}-%{release}
+Requires:	%{devnamepp} = %{version}-%{release}
+
+%description -n %{dev32namepp}
+This package contains the libraries and header files necessary to develop
+applications using FLAC written in C++.
+
 %prep
 %autosetup -p1
 ./autogen.sh -V
@@ -77,19 +129,34 @@ rm -rf html
 cp -r doc/html .
 autoreconf -fi
 
-%build
+export CONFIGURE_TOP="$(pwd)"
+%if %{with compat32}
+mkdir build32
+cd build32
+%configure32
+cd ..
+unset PKG_CONFIG_PATH
+%endif
+
+mkdir buildnative
+cd buildnative
 %configure \
 	--disable-static \
 	--disable-xmms-plugin \
 	--disable-thorough-tests \
-	--disable-asm-optimizations
-# *****ing retarded libtool messes with compiler flags, breaking them
-find . -name Makefile |xargs sed -i -e 's, dwarf-4, -gdwarf-4,g'
+	--enable-asm-optimizations
 
-%make_build
+%build
+%if %{with compat32}
+%make_build -C build32
+%endif
+%make_build -C buildnative
 
 %install
-%make_install
+%if %{with compat32}
+%make_install -C build32
+%endif
+%make_install -C buildnative
 
 %files
 %doc AUTHORS COPYING* README
@@ -123,9 +190,26 @@ find . -name Makefile |xargs sed -i -e 's, dwarf-4, -gdwarf-4,g'
 %{_libdir}/libFLAC.so
 %{_datadir}/aclocal/libFLAC.m4
 %{_libdir}/pkgconfig/flac.pc
+%doc %{_docdir}/flac
 
 %files -n %{devnamepp}
 %{_includedir}/FLAC++
 %{_libdir}/libFLAC++.so
 %{_datadir}/aclocal/libFLAC++.m4
 %{_libdir}/pkgconfig/flac++.pc
+
+%if %{with compat32}
+%files -n %{lib32name}
+%{_prefix}/lib/libFLAC.so.%{major}*
+
+%files -n %{lib32namepp}
+%{_prefix}/lib/libFLAC++.so.%{majorpp}*
+
+%files -n %{dev32name}
+%{_prefix}/lib/libFLAC.so
+%{_prefix}/lib/pkgconfig/flac.pc
+
+%files -n %{dev32namepp}
+%{_prefix}/lib/libFLAC++.so
+%{_prefix}/lib/pkgconfig/flac++.pc
+%endif
