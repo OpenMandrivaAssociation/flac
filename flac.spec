@@ -1,15 +1,15 @@
-%define major 8
-%define libname %mklibname %{name} %{major}
+%define major 12
+%define libname %mklibname %{name}
 %define devname %mklibname -d %{name}
 
-%define majorpp 6
-%define libnamepp %mklibname %{name}++ %{majorpp}
+%define majorpp 10
+%define libnamepp %mklibname %{name}++
 %define devnamepp %mklibname -d %{name}++
 %global optflags %{optflags} -O3
 
-%define lib32name lib%{name}%{major}
+%define lib32name lib%{name}
 %define dev32name lib%{name}-devel
-%define lib32namepp lib%{name}++%{majorpp}
+%define lib32namepp lib%{name}++
 %define dev32namepp lib%{name}++-devel
 
 # flac is used by audiofile, which is used by wine
@@ -125,8 +125,6 @@ applications using FLAC written in C++.
 %prep
 %autosetup -p1
 ./autogen.sh -V
-rm -rf html
-cp -r doc/html .
 autoreconf -fi
 
 export CONFIGURE_TOP="$(pwd)"
@@ -159,22 +157,9 @@ cd buildnative
 %make_install -C buildnative
 
 %files
-%doc AUTHORS COPYING* README
+%doc AUTHORS COPYING*
 %{_datadir}/doc/flac/FLAC.tag
-%{_datadir}/doc/flac/changelog.html
-%{_datadir}/doc/flac/developers.html
-%{_datadir}/doc/flac/documentation*
-%{_datadir}/doc/flac/faq.html
-%{_datadir}/doc/flac/favicon.ico
-%{_datadir}/doc/flac/features.html
-%{_datadir}/doc/flac/flac.css
-%{_datadir}/doc/flac/format.html
-%{_datadir}/doc/flac/id.html
 %{_datadir}/doc/flac/images/logo*
-%{_datadir}/doc/flac/images/logo130*
-%{_datadir}/doc/flac/index.html
-%{_datadir}/doc/flac/license.html
-%{_datadir}/doc/flac/ogg_mapping.html
 %{_bindir}/flac
 %{_bindir}/metaflac
 %{_mandir}/man1/*
