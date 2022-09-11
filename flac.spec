@@ -123,6 +123,7 @@ This package contains the libraries and header files necessary to develop
 applications using FLAC written in C++.
 
 %prep
+export LC_ALL=C.utf-8
 %autosetup -p1
 ./autogen.sh -V
 autoreconf -fi
