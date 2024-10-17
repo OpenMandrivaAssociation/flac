@@ -25,7 +25,7 @@ Version:	1.4.3
 Release:	1
 License:	BSD and GPLv2+
 Group:		Sound
-Url:		http://flac.sourceforge.net/
+Url:		https://flac.sourceforge.net/
 Source0:	http://downloads.xiph.org/releases/flac/%{name}-%{version}.tar.xz
 Patch0:		flac-1.3.3-no-Lusrlib.patch
 BuildRequires:	libtool
