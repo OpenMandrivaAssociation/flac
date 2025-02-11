@@ -21,12 +21,12 @@
 
 Summary:	An encoder/decoder for the Free Lossless Audio Codec
 Name:		flac
-Version:	1.4.3
+Version:	1.5.0
 Release:	1
 License:	BSD and GPLv2+
 Group:		Sound
 Url:		https://flac.sourceforge.net/
-Source0:	http://downloads.xiph.org/releases/flac/%{name}-%{version}.tar.xz
+Source0:	https://downloads.xiph.org/releases/flac/%{name}-%{version}.tar.xz
 Patch0:		flac-1.3.3-no-Lusrlib.patch
 BuildRequires:	libtool
 %ifarch %{ix86}
