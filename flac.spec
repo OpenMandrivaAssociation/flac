@@ -2,7 +2,7 @@
 %define libname %mklibname %{name}
 %define devname %mklibname -d %{name}
 
-%define majorpp 10
+%define majorpp 11
 %define libnamepp %mklibname %{name}++
 %define devnamepp %mklibname -d %{name}++
 %global optflags %{optflags} -O3
@@ -26,7 +26,7 @@ Release:	1
 License:	BSD and GPLv2+
 Group:		Sound
 Url:		https://flac.sourceforge.net/
-Source0:	https://downloads.xiph.org/releases/flac/%{name}-%{version}.tar.xz
+Source0:	https://github.com/xiph/flac/releases/download/%{version}/flac-%{version}.tar.xz
 Patch0:		flac-1.3.3-no-Lusrlib.patch
 BuildRequires:	libtool
 %ifarch %{ix86}
