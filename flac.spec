@@ -28,6 +28,11 @@ Group:		Sound
 Url:		https://flac.sourceforge.net/
 Source0:	https://github.com/xiph/flac/releases/download/%{version}/flac-%{version}.tar.xz
 Patch0:		flac-1.3.3-no-Lusrlib.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libtool
 %ifarch %{ix86}
 BuildRequires:	nasm
